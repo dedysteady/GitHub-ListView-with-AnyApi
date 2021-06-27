@@ -1,6 +1,6 @@
-# github_finder
+# GitHub ListView with AnyApi
 
-A new Flutter project.
+Flutter App with Public Api (AnyApi) to fulfill my assignment in Mobile Programming Course
 
 ## Getting Started
 
