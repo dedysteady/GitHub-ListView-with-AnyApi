@@ -20,6 +20,9 @@ class _IndexPageState extends State<IndexPage> {
     this.fetchUser();
   }
   fetchUser() async {
+    setState(() {
+      isLoading = true;
+    });
     var url = "https://api.github.com/users";
     var response = await http.get(Uri.parse(url));
     if(response.statusCode == 200){
@@ -27,6 +30,7 @@ class _IndexPageState extends State<IndexPage> {
       print(items);
       setState(() {
         users = items;
+        isLoading = false;
       });
     }else{
       users = [];
@@ -60,10 +64,9 @@ class _IndexPageState extends State<IndexPage> {
     );
   }
   Widget getBody(){
-    List items = [
-      "1",
-      "2"
-    ];
+    if(users.contains(null) || users.length < 0 || isLoading){
+      return Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(primary),));
+    }
     return ListView.builder(
       itemCount: users.length,
       itemBuilder: (context,index){
